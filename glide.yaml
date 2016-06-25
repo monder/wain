@@ -1,0 +1,5 @@
+package: github.com/monder/wain
+import:
+- package: github.com/gorilla/mux
+- package: gopkg.in/h2non/bimg.v0
+- package: github.com/aws/aws-sdk-go

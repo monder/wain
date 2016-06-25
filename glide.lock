@@ -1,0 +1,43 @@
+hash: d0daba7e055a20aae274f5c94707c2af18f1da9f5d7574d4eb4cb9e2b4867af5
+updated: 2016-06-25T14:42:53.516549612+03:00
+imports:
+- name: github.com/aws/aws-sdk-go
+  version: b85eaebe3c12e8db01a7c26882457c5c51100471
+  subpackages:
+  - aws
+  - aws/credentials
+  - aws/session
+  - service/s3
+  - aws/awserr
+  - aws/client
+  - aws/corehandlers
+  - aws/defaults
+  - aws/request
+  - private/endpoints
+  - aws/awsutil
+  - aws/client/metadata
+  - aws/signer/v4
+  - private/protocol
+  - private/protocol/restxml
+  - private/waiter
+  - aws/credentials/ec2rolecreds
+  - aws/ec2metadata
+  - private/protocol/rest
+  - private/protocol/query
+  - private/protocol/xml/xmlutil
+  - private/protocol/query/queryutil
+- name: github.com/go-ini/ini
+  version: 72ba3e6b9e6b87e0c74c9a7a4dc86e8dd8ba4355
+- name: github.com/gorilla/context
+  version: aed02d124ae4a0e94fea4541c8effd05bf0c8296
+- name: github.com/gorilla/mux
+  version: 9fa818a44c2bf1396a17f9d5a3c0f6dd39d2ff8e
+- name: github.com/jmespath/go-jmespath
+  version: 0b12d6b521d83fc7f755e7cfc1b1fbdd35a01a74
+- name: github.com/tj/go-debug
+  version: ff4a55a20a86994118644bbddc6a216da193cc13
+- name: gopkg.in/h2non/bimg.v0
+  version: a0fc602e695f180c997b219dea06b50229c252bd
+- name: gopkg.in/yaml.v2
+  version: a83829b6f1293c91addabc89d0571c246397bbf4
+devImports: []
