@@ -40,9 +40,10 @@ func HandleProcessing(url ConfigUrl, s3 map[string]*S3Connection, r ResizeOption
 	fmt.Printf("Resizing...\n")
 
 	options := bimg.Options{
-		Height:  r.Height,
-		Width:   r.Width,
-		Quality: 100,
+		Height:    r.Height,
+		Width:     r.Width,
+		Quality:   100,
+		Interlace: true,
 	}
 
 	imageData, err = bimg.NewImage(imageData).Process(options)
