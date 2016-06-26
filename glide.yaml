@@ -1,5 +1,10 @@
 package: github.com/monder/wain
 import:
-- package: github.com/gorilla/mux
-- package: gopkg.in/h2non/bimg.v0
 - package: github.com/aws/aws-sdk-go
+  subpackages:
+  - aws
+  - aws/credentials
+  - aws/session
+  - service/s3
+- package: github.com/gorilla/mux
+- package: gopkg.in/yaml.v2

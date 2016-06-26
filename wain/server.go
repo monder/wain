@@ -13,6 +13,8 @@ type Server struct {
 
 func CreateHTTPServer(config *Config) (*Server, error) {
 
+	VipsInit()
+
 	s3, err := CreateS3(config)
 	if err != nil {
 		return nil, err
@@ -45,7 +47,7 @@ func (s *Server) handleProcessing(url ConfigUrl) func(http.ResponseWriter, *http
 		if err != nil {
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 			w.WriteHeader(400)
-			w.Write([]byte(fmt.Sprintf("%s", err)))
+			fmt.Println(err)
 		} else {
 			//TODO w.Header().Set("Content-Type", "")
 			w.Header().Set("Content-Length", fmt.Sprintf("%d", len(imageBytes)))

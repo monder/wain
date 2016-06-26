@@ -2,7 +2,6 @@ package wain
 
 import (
 	"fmt"
-	"gopkg.in/h2non/bimg.v0"
 	"regexp"
 	"strings"
 )
@@ -26,30 +25,27 @@ func HandleProcessing(url ConfigUrl, s3 map[string]*S3Connection, r ResizeOption
 	cacheKey = unusedVariables.ReplaceAllString(cacheKey, "")
 	originalKey = unusedVariables.ReplaceAllString(originalKey, "")
 
-	fmt.Printf("Checking cached version %s\n", cacheKey)
 	imageData, err := s3[url.Cache.Bucket].GetObject(cacheKey)
 	if err == nil {
 		return imageData, nil
 	}
 
-	fmt.Printf("No cached version found\n")
+	fmt.Printf("No cached version found %s\n", cacheKey)
 	fmt.Printf("Downloading %s\n", originalKey)
 
 	imageData, err = s3[url.Original.Bucket].GetObject(originalKey)
+	if err != nil {
+		return nil, err
+	}
 
 	fmt.Printf("Resizing...\n")
 
-	options := bimg.Options{
-		Height:    r.Height,
-		Width:     r.Width,
-		Quality:   100,
-		Interlace: true,
+	imageData, err = VipsResize(imageData, r)
+
+	if err == nil {
+		fmt.Printf("Save cached version\n")
+		go s3[url.Cache.Bucket].PutObject(cacheKey, imageData, "image/jpeg")
 	}
-
-	imageData, err = bimg.NewImage(imageData).Process(options)
-
-	fmt.Printf("Save cached version\n")
-	go s3[url.Cache.Bucket].PutObject(cacheKey, imageData, "image/jpeg")
 
 	return imageData, err
 }
