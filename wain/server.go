@@ -47,6 +47,7 @@ func (s *Server) handleProcessing(url ConfigUrl) func(http.ResponseWriter, *http
 		if err != nil {
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 			w.WriteHeader(400)
+			fmt.Printf("Unable to process image %s\n", r.URL)
 			fmt.Println(err)
 		} else {
 			//TODO w.Header().Set("Content-Type", "")

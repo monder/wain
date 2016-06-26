@@ -5,8 +5,6 @@
 int vips_wain_init() {
     if (vips_init("wain-vips")) vips_error_exit("unable to start VIPS");
     vips_concurrency_set(1);
-	vips_cache_set_max_mem(100 * 1048576); // 100Mb
-	vips_cache_set_max(500);
     
     return 0;
 }
@@ -38,6 +36,7 @@ static double calculate_shrink(VipsImage *im, gboolean crop, int width, int heig
 int vips_wain_resize(void *src, size_t src_len, void **dst, size_t *dst_len, int width, int height) {
 
     VipsImage *image = vips_image_new_from_buffer(src, src_len, NULL, NULL);
+    if (!image) return 1;
     VipsImage *tmp = NULL;
 
     if (height == 0) {

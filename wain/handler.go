@@ -2,9 +2,12 @@ package wain
 
 import (
 	"fmt"
+	. "github.com/tj/go-debug"
 	"regexp"
 	"strings"
 )
+
+var debug = Debug("handler")
 
 type ResizeOptions struct {
 	Width  int
@@ -30,21 +33,26 @@ func HandleProcessing(url ConfigUrl, s3 map[string]*S3Connection, r ResizeOption
 		return imageData, nil
 	}
 
-	fmt.Printf("No cached version found %s\n", cacheKey)
-	fmt.Printf("Downloading %s\n", originalKey)
+	debug("No cached version found %s\n", cacheKey)
+	debug("Downloading %s\n", originalKey)
 
 	imageData, err = s3[url.Original.Bucket].GetObject(originalKey)
 	if err != nil {
 		return nil, err
 	}
 
-	fmt.Printf("Resizing...\n")
+	debug("Resizing...\n")
 
 	imageData, err = VipsResize(imageData, r)
 
 	if err == nil {
-		fmt.Printf("Save cached version\n")
-		go s3[url.Cache.Bucket].PutObject(cacheKey, imageData, "image/jpeg")
+		debug("Save cached version\n")
+		go func() {
+			e := s3[url.Cache.Bucket].PutObject(cacheKey, imageData, "image/jpeg")
+			if e != nil {
+				fmt.Println(e)
+			}
+		}()
 	}
 
 	return imageData, err
