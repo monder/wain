@@ -5,7 +5,7 @@
 int vips_wain_init() {
     if (vips_init("wain-vips")) vips_error_exit("unable to start VIPS");
     vips_concurrency_set(1);
-    
+    vips_cache_set_max(0);
     return 0;
 }
 
