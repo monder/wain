@@ -1,5 +1,5 @@
 # Wain
-
+[![Go Report Card](https://goreportcard.com/badge/github.com/monder/wain)](https://goreportcard.com/report/github.com/monder/wain)
 [![license](https://img.shields.io/github/license/monder/wain.svg?maxAge=2592000&style=flat-square)]()
 [![GitHub tag](https://img.shields.io/github/tag/monder/wain.svg?style=flat-square)]()
 
