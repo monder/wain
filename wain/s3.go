@@ -43,6 +43,7 @@ func (s3 *S3Connection) GetObject(key string) ([]byte, error) {
 	}
 
 	bytes, err := ioutil.ReadAll(resp.Body)
+	resp.Body.Close()
 	return bytes, err
 }
 
